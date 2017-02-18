@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateLoanActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:id="@+id/nameEditText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:layout_below="@+id/nameEditText"
+        android:layout_alignLeft="@+id/nameEditText"
+        android:layout_alignStart="@+id/nameEditText"
+        android:layout_marginTop="40dp"
+        android:id="@+id/emailEditText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:layout_below="@+id/emailEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:id="@+id/phoneEditText" />
+
+    <Button
+        android:text="Adicionar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phoneEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:id="@+id/createButton" />
+
+
+</RelativeLayout>
