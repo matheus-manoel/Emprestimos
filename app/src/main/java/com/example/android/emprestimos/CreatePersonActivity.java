@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 public class CreatePersonActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
+    private EditText loanDate = (EditText) findViewById(R.id.loanDateEditText);
+    private EditText devolutionDate = (EditText) findViewById(R.id.devolutionDateEditText);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,4 +47,5 @@ public class CreatePersonActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

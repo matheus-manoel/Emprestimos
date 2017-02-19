@@ -16,5 +16,60 @@
             layout="@layout/toolbar" />
     </LinearLayout>
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:layout_marginTop="195dp"
+        android:id="@+id/loanDateEditText"
+        android:hint="Data do empréstimo"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_centerHorizontal="true" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/loanDateEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/empresteiRadioGroup" >
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emprestei"
+            android:id="@+id/empresteiRadioButton" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Me emprestaram"
+            android:id="@+id/emprestaramRadioButton" />
+        </RadioGroup>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/devolutionDateEditText"
+        android:focusable="false"
+        android:hint="Data de devolução"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/loanDateEditText"
+        android:layout_alignStart="@+id/loanDateEditText" />
+
+    <RadioButton
+        android:text="É dinheiro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/devolutionDateEditText"
+        android:layout_alignLeft="@+id/empresteiRadioGroup"
+        android:layout_alignStart="@+id/empresteiRadioGroup"
+        android:layout_marginTop="34dp"
+        android:id="@+id/eDinheiroRadioButton" />
+
 
 </RelativeLayout>
