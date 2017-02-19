@@ -69,7 +69,31 @@
         android:layout_alignLeft="@+id/empresteiRadioGroup"
         android:layout_alignStart="@+id/empresteiRadioGroup"
         android:layout_marginTop="34dp"
-        android:id="@+id/eDinheiroRadioButton" />
+        android:id="@+id/isMoneyRadioButton"
+        android:checked="false" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:layout_alignBottom="@+id/isMoneyRadioButton"
+        android:layout_toRightOf="@+id/empresteiRadioGroup"
+        android:layout_toEndOf="@+id/empresteiRadioGroup"
+        android:id="@+id/valueEditText"
+        android:hint="00,00" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/isMoneyRadioButton"
+        android:layout_alignLeft="@+id/isMoneyRadioButton"
+        android:layout_alignStart="@+id/isMoneyRadioButton"
+        android:layout_marginTop="30dp"
+        android:id="@+id/descriptionEditText"
+        android:hint="Descrição" />
 
 
 </RelativeLayout>
