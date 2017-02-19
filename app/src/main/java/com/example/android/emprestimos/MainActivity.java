@@ -12,12 +12,6 @@ import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.android.emprestimos.R;
-import com.example.android.emprestimos.AllFragment;
-import com.example.android.emprestimos.EmprestadoFragment;
-import com.example.android.emprestimos.EmpresteiFragment;
-import com.example.android.emprestimos.PeopleFragment;
-
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -32,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
