@@ -5,13 +5,17 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class CreatePersonActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-    private EditText loanDate = (EditText) findViewById(R.id.loanDateEditText);
-    private EditText devolutionDate = (EditText) findViewById(R.id.devolutionDateEditText);
+    private Button createButton;
+    private EditText nameEditText;
+    private EditText emailEditText;
+    private EditText phoneEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +24,16 @@ public class CreatePersonActivity extends AppCompatActivity {
         setTitle("Adicionar Pessoa");
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        createButton = (Button) findViewById(R.id.createButton);
+        nameEditText = (EditText) findViewById(R.id.nameEditText);
+        emailEditText = (EditText) findViewById(R.id.emailEditText);
+        phoneEditText = (EditText) findViewById(R.id.phoneEditText);
+
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        setListeners();
     }
 
 
@@ -46,6 +57,19 @@ public class CreatePersonActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setListeners() {
+
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Person created = new Person(nameEditText.getText().toString(),
+                                            emailEditText.getText().toString(),
+                                            phoneEditText.getText().toString());
+            }
+        });
+
     }
 
 }
