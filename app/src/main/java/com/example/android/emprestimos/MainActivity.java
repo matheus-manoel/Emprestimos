@@ -1,5 +1,7 @@
 package com.example.android.emprestimos;
 
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -11,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.android.emprestimos.database.DBCore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FloatingActionButton addFab;
+    private DBCore dbCore;
+    private SQLiteDatabase dbConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         addFab = (FloatingActionButton) findViewById(R.id.addFab);
+
+        try {
+            dbCore = new DBCore(this);
+            dbConnection = dbCore.getReadableDatabase();
+        } catch (SQLException ex) {
+            //// TODO: 21/02/17 add catch
+        }
 
         setListeners();
     }
