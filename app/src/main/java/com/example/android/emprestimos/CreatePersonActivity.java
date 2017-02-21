@@ -1,5 +1,6 @@
 package com.example.android.emprestimos;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -64,9 +65,15 @@ public class CreatePersonActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Person created = new Person(nameEditText.getText().toString(),
+                Person person = new Person(nameEditText.getText().toString(),
                                             emailEditText.getText().toString(),
                                             phoneEditText.getText().toString());
+
+                Intent intent = new Intent();
+                intent.putExtra("PERSON", person);
+
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 

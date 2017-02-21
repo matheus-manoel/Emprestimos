@@ -9,10 +9,18 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class DBCore extends SQLiteOpenHelper {
+    private static DBCore instance;
     private static final String NAME = "emprestimos.db";
     private static final int VERSION = 1;
 
-    public DBCore(Context ctx) {
+    public static synchronized DBCore getInstance(Context context) {
+        if (instance == null) {
+            instance = new DBCore(context.getApplicationContext());
+        }
+        return instance;
+    }
+
+    private DBCore(Context ctx) {
         super(ctx, NAME, null, VERSION);
     }
 

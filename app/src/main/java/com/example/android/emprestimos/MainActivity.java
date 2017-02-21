@@ -1,5 +1,6 @@
 package com.example.android.emprestimos;
 
+import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.android.emprestimos.database.DB;
 import com.example.android.emprestimos.database.DBCore;
 
 import java.util.ArrayList;
@@ -24,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FloatingActionButton addFab;
-    private DBCore dbCore;
-    private SQLiteDatabase dbConnection;
+    private DB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
         addFab = (FloatingActionButton) findViewById(R.id.addFab);
 
         try {
-            dbCore = new DBCore(this);
-            dbConnection = dbCore.getReadableDatabase();
+            db = new DB(this);
         } catch (SQLException ex) {
             //// TODO: 21/02/17 add catch
         }
@@ -111,11 +111,22 @@ public class MainActivity extends AppCompatActivity {
                         // third tab is selected
                         break;
                     case 3:
-                        // fourth tab is selected
+                        Intent intent = new Intent(getApplicationContext(),
+                                CreatePersonActivity.class);
+                        startActivityForResult(intent, 1);
                         break;
                 }
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Person p = (Person) data.getSerializableExtra("PERSON");
+            setTitle(p.getName());
+        }
     }
 }
