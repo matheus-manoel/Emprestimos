@@ -17,6 +17,8 @@ import android.view.View;
 import com.example.android.emprestimos.database.DB;
 import com.example.android.emprestimos.database.DBCore;
 
+import com.example.android.emprestimos.PeopleFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FloatingActionButton addFab;
+    private ViewPagerAdapter adapter;
     private DB db;
 
     @Override
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new AllFragment(), "TODOS");
         adapter.addFragment(new EmpresteiFragment(), "EMPRESTEI");
         adapter.addFragment(new EmprestadoFragment(), "EMPRESTADO");
@@ -126,7 +129,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Person p = (Person) data.getSerializableExtra("PERSON");
-            setTitle(p.getName());
+            db.insertPerson(p);
+            PeopleFragment peopleFragment = (PeopleFragment) adapter.getItem(3);
+            peopleFragment.addPersonToList(p);
         }
     }
 }

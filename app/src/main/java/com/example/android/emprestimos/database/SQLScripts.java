@@ -7,14 +7,14 @@ package com.example.android.emprestimos.database;
 public final class SQLScripts {
 
     public static final String CREATE_PEOPLE = "CREATE TABLE people (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            " name TEXT NOT NULL," +
-            " email TEXT NOT NULL," +
-            " phone TEXT NOT NULL);";
+            "name TEXT NOT NULL," +
+            "email TEXT NOT NULL," +
+            "phone TEXT NOT NULL);";
 
     public static final String CREATE_LOANS = "CREATE TABLE loans (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            " loanDate TEXT NOT NULL," +
-            " isMoney TEXT NOT NULL," +
-            " phone TEXT NOT NULL," +
+            "loanDate TEXT NOT NULL," +
+            "isMoney TEXT NOT NULL," +
+            "phone TEXT NOT NULL," +
             "loan_person INTEGER NOT NULL," +
             "FOREIGN KEY(loan_person) REFERENCES people(_id));";
 

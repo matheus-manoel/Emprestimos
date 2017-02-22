@@ -2,9 +2,12 @@ package com.example.android.emprestimos;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.database.SQLException;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +17,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.example.android.emprestimos.database.DB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +32,7 @@ public class PeopleFragment extends Fragment {
     private List<Person> peopleList = new ArrayList<>();
     private RecyclerView recyclerView;
     private PeopleAdapter pAdapter;
+    private DB db;
 
     public PeopleFragment() {
         // Required empty public constructor
@@ -53,44 +59,23 @@ public class PeopleFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(pAdapter);
 
-        preparePeopleData();
+
+        try {
+            db = new DB(getContext());
+        } catch (SQLException ex) {
+            //// TODO: 21/02/17 add catch
+        }
+
+        peopleList.addAll(db.queryPeople(null, null));
+        pAdapter.notifyDataSetChanged();
 
         setListeners();
 
         return view;
     }
 
-    private void preparePeopleData() {
-        Person p1 = new Person("Matheus C. Manoel", "matheuscmanoel@gmail.com", "912939401");
-        peopleList.add(p1);
-
-        Person p2 = new Person("Fernanda Neves", "fer@gmail.com", "738494857");
-        peopleList.add(p2);
-
-        Person p3 = new Person("Carlos Pereira", "carlos@uol.com", "32132112");
-        peopleList.add(p3);
-
-        Person p4 = new Person("Pedro", "pedro2321@yahoo.com.br", "912939401");
-        peopleList.add(p4);
-
-        Person p5 = new Person("Josué", "josué@gmail.com", "912939401");
-        peopleList.add(p5);
-
-        Person p6 = new Person("Zeca Caetano", "zekinha@gmail.com", "321312312");
-        peopleList.add(p6);
-
-        Person p7 = new Person("Lenin Figueira", "lenin@gmail.com", "912939401");
-        peopleList.add(p7);
-
-        Person p8 = new Person("Carlos", "lenin@gmail.com", "912939401");
-        peopleList.add(p8);
-
-        Person p9 = new Person("João Pedro", "lenin@gmail.com", "912939401");
-        peopleList.add(p9);
-
-        Person p10 = new Person("Masquerano", "lenin@gmail.com", "912939401");
-        peopleList.add(p10);
-
+    public void addPersonToList(Person p) {
+        peopleList.add(p);
         pAdapter.notifyDataSetChanged();
     }
 
@@ -155,10 +140,37 @@ public class PeopleFragment extends Fragment {
             }
 
             @Override
-            public void onLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "Long press on position :"+position,
-                        Toast.LENGTH_LONG).show();
+            public void onLongClick(View view, final int position) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setItems(new CharSequence[]
+                                {"Editar", "Deletar"},
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // The 'which' argument contains the index position
+                                // of the selected item
+                                switch (which) {
+                                    case 0:
+                                        Toast.makeText(getContext(), "edit 1",
+                                                Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 1:
+                                        Person p = peopleList.get(position);
+                                        db.deletePerson(p);
+                                        peopleList.remove(p);
+
+                                        pAdapter.notifyDataSetChanged();
+
+                                        Toast.makeText(getContext(), "Deletado",
+                                                Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+                            }
+                        });
+                builder.create().show();
+
             }
         }));
     }
+
 }

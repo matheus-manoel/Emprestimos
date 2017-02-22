@@ -50,11 +50,11 @@ public class DB {
         List people = new ArrayList<Person>();
         String[] columns = new String[]{"_id", "name", "email", "phone"};
 
+        //// TODO: 21/02/17 query asc by name
         Cursor cursor = db.query("people", columns, selection, selectionArgs, null, null, null,
-                                "name ASC");
+                null);
 
-        if(cursor.getCount() > 0) {
-            cursor.moveToFirst();
+        if(cursor.moveToFirst()) {
 
             do {
 
@@ -64,6 +64,8 @@ public class DB {
 
             } while(cursor.moveToNext());
         }
+
+        cursor.close();
 
         return people;
     }
