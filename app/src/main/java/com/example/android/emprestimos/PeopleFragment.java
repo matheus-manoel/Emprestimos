@@ -3,6 +3,7 @@ package com.example.android.emprestimos;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,8 @@ import com.example.android.emprestimos.database.DB;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +36,7 @@ public class PeopleFragment extends Fragment {
     private RecyclerView recyclerView;
     private PeopleAdapter pAdapter;
     private DB db;
+    private int indexOfDeleted;
 
     public PeopleFragment() {
         // Required empty public constructor
@@ -147,15 +151,22 @@ public class PeopleFragment extends Fragment {
                                 {"Editar", "Deletar"},
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                Person p = peopleList.get(position);
+                                indexOfDeleted = position;
+
                                 // The 'which' argument contains the index position
                                 // of the selected item
                                 switch (which) {
                                     case 0:
-                                        Toast.makeText(getContext(), "edit 1",
-                                                Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getContext(),
+                                                CreatePersonActivity.class);
+                                        intent.putExtra
+                                                ("callingActivity", "PEOPLE_FRAGMENT");
+                                        intent.putExtra
+                                                ("EDIT_PERSON", p);
+                                        startActivityForResult(intent, 1);
                                         break;
                                     case 1:
-                                        Person p = peopleList.get(position);
                                         db.deletePerson(p);
                                         peopleList.remove(p);
 
@@ -171,6 +182,17 @@ public class PeopleFragment extends Fragment {
 
             }
         }));
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Person p = (Person) data.getSerializableExtra("PERSON");
+            db.updatePerson(p);
+            peopleList.set(this.indexOfDeleted, p);
+            pAdapter.notifyDataSetChanged();
+            //Toast.makeText(getContext(), "Pessoa editada com sucesso.", Toast.LENGTH_SHORT);
+        }
     }
 
 }

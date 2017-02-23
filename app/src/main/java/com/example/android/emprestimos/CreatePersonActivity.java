@@ -20,6 +20,7 @@ public class CreatePersonActivity extends AppCompatActivity {
     private EditText nameEditText;
     private EditText emailEditText;
     private EditText phoneEditText;
+    private String callingActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,21 @@ public class CreatePersonActivity extends AppCompatActivity {
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         phoneEditText = (EditText) findViewById(R.id.phoneEditText);
 
-
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        //checa qual activity/fragment está chamando e edita o necessário
+        callingActivity = getIntent().getStringExtra("callingActivity");
+        if(callingActivity.equals("PEOPLE_FRAGMENT")) {
+            Person person = (Person) getIntent().getSerializableExtra("EDIT_PERSON");
+
+            setTitle("Editar pessoa");
+            createButton.setText("Atualizar");
+
+            nameEditText.setText(person.getName());
+            emailEditText.setText(person.getEmail());
+            phoneEditText.setText(person.getPhone());
+        }
 
         setListeners();
     }
@@ -68,15 +81,23 @@ public class CreatePersonActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Person person = new Person();
                 String name = nameEditText.getText().toString();
                 String email = emailEditText.getText().toString();
                 String phone = phoneEditText.getText().toString();
+                Intent intent = new Intent();
+
+                if(callingActivity.equals("PEOPLE_FRAGMENT")) {
+                    person = (Person) getIntent().getSerializableExtra("EDIT_PERSON");
+                    intent.putExtra("PRE_PERSON", person);
+                }
 
                 if ( !TextUtils.isEmpty(name) ) {
 
-                    Person person = new Person(name, email, phone);
+                    person.setName(name);
+                    person.setEmail(email);
+                    person.setPhone(phone);
 
-                    Intent intent = new Intent();
                     intent.putExtra("PERSON", person);
 
                     setResult(RESULT_OK, intent);

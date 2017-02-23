@@ -15,6 +15,8 @@ public class Person implements Serializable {
     private String phone;
     private int id;
 
+    public Person() {}
+
     public Person(String name, String email, String phone) {
         this.name = name;
         this.email = email;

@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.android.emprestimos.database.DB;
 import com.example.android.emprestimos.database.DBCore;
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     case 3:
                         Intent intent = new Intent(getApplicationContext(),
                                 CreatePersonActivity.class);
+                        intent.putExtra("callingActivity", "MAIN_ACTIVITY");
                         startActivityForResult(intent, 1);
                         break;
                 }
@@ -128,10 +130,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
+            //// TODO: 22/02/17 fix editing
             Person p = (Person) data.getSerializableExtra("PERSON");
             db.insertPerson(p);
             PeopleFragment peopleFragment = (PeopleFragment) adapter.getItem(3);
             peopleFragment.addPersonToList(p);
+            Toast.makeText(getApplicationContext(), "Pessoa adicionada com sucesso.",
+                    Toast.LENGTH_SHORT);
         }
     }
 }
