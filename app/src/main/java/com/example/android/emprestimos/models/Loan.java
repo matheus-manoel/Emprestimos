@@ -5,121 +5,79 @@ package com.example.android.emprestimos.models;
  */
 
 public class Loan {
-    private int day;
-    private int month;
-    private int year;
-    private int devolutionDay;
-    private int devolutionMonth;
-    private int devolutionYear;
+    private long date;
+    private long devolutionDate;
     private boolean isMoney;
     private double value;
     private String description;
     private Person person;
-    private boolean emprestou;
+    private boolean lent;
 
     public Loan() {}
 
-    public Loan(int day, int month, int year, int devolutionDay, int devolutionMonth,
-                int devolutionYear, boolean isMoney, double value, String description,
-                Person person, boolean emprestou) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
-        this.devolutionDay = devolutionDay;
-        this.devolutionMonth = devolutionMonth;
-        this.devolutionYear = devolutionYear;
+    public Loan(long date, long devolutionDate, boolean isMoney, double value, String description, Person person, boolean emprestou) {
+        this.date = date;
+        this.devolutionDate = devolutionDate;
         this.isMoney = isMoney;
         this.value = value;
         this.description = description;
         this.person = person;
-        this.emprestou = emprestou;
+        this.lent = emprestou;
     }
 
-    public int getDay() {
-        return day;
+    public long getDate() {
+        return date;
     }
 
-    public int getMonth() {
-        return month;
+    public void setDate(long date) {
+        this.date = date;
     }
 
-    public int getYear() {
-        return year;
+    public long getDevolutionDate() {
+        return devolutionDate;
     }
 
-    public int getDevolutionDay() {
-        return devolutionDay;
-    }
-
-    public int getDevolutionMonth() {
-        return devolutionMonth;
-    }
-
-    public int getDevolutionYear() {
-        return devolutionYear;
+    public void setDevolutionDate(long devolutionDate) {
+        this.devolutionDate = devolutionDate;
     }
 
     public boolean isMoney() {
         return isMoney;
     }
 
-    public double getValue() {
-        return value;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public boolean isEmprestou() {
-        return emprestou;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void setDevolutionDay(int devolutionDay) {
-        this.devolutionDay = devolutionDay;
-    }
-
-    public void setDevolutionMonth(int devolutionMonth) {
-        this.devolutionMonth = devolutionMonth;
-    }
-
-    public void setDevolutionYear(int devolutionYear) {
-        this.devolutionYear = devolutionYear;
-    }
-
     public void setMoney(boolean money) {
         isMoney = money;
+    }
+
+    public double getValue() {
+        return value;
     }
 
     public void setValue(double value) {
         this.value = value;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Person getPerson() {
+        return person;
     }
 
     public void setPerson(Person person) {
         this.person = person;
     }
 
-    public void setEmprestou(boolean emprestou) {
-        this.emprestou = emprestou;
+    public boolean isLent() {
+        return lent;
+    }
+
+    public void setLent(boolean lent) {
+        this.lent = lent;
     }
 }

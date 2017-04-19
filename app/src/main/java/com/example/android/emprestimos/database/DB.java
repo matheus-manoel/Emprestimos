@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.android.emprestimos.models.Loan;
 import com.example.android.emprestimos.models.Person;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class DB {
 
         db.insert("people", null, values);
     }
+
 
     public void updatePerson(Person person) {
         ContentValues values = new ContentValues();
@@ -68,5 +70,18 @@ public class DB {
         cursor.close();
 
         return people;
+    }
+
+    public void insertLoan(Loan loan) {
+        ContentValues values = new ContentValues();
+
+        values.put("date", loan.getDate());
+        values.put("devolutionDate", loan.getDevolutionDate());
+        values.put("isMoney", loan.isMoney());
+        values.put("value", loan.getValue());
+        values.put("loan_person", loan.getPerson().getId());
+        values.put("description", loan.getDescription());
+
+        db.insert("loans", null, values);
     }
 }

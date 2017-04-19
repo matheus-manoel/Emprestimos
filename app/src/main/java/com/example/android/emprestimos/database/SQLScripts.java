@@ -12,11 +12,12 @@ public final class SQLScripts {
             "phone TEXT);";
 
     public static final String CREATE_LOANS = "CREATE TABLE loans (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "loanDate TEXT NOT NULL," +
+            "date BIGINT NOT NULL," +
+            "devolutionDate BIGINT," +
             "isMoney CHAR NOT NULL," +
             "value TEXT," +
-            "phone TEXT NOT NULL," +
             "loan_person INTEGER NOT NULL," +
+            "description TEXT," +
             "FOREIGN KEY(loan_person) REFERENCES people(_id));";
 
     public static final String DELETE_PEOPLE = "DROP TABLE people;";
