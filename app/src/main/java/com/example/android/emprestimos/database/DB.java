@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.android.emprestimos.Person;
+import com.example.android.emprestimos.models.Person;
 
 import java.util.ArrayList;
 import java.util.List;

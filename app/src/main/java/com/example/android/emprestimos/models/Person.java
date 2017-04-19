@@ -1,4 +1,4 @@
-package com.example.android.emprestimos;
+package com.example.android.emprestimos.models;
 
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;

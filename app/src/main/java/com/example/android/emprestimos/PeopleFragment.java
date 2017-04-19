@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.android.emprestimos.database.DB;
+import com.example.android.emprestimos.models.Person;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +70,7 @@ public class PeopleFragment extends Fragment {
             //// TODO: 21/02/17 add catch
         }
 
+        peopleList.clear();
         peopleList.addAll(db.queryPeople(null, null));
         pAdapter.notifyDataSetChanged();
 

@@ -2,7 +2,6 @@ package com.example.android.emprestimos;
 
 import android.content.Intent;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -16,9 +15,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.android.emprestimos.database.DB;
-import com.example.android.emprestimos.database.DBCore;
 
-import com.example.android.emprestimos.PeopleFragment;
+import com.example.android.emprestimos.models.Person;
 
 import java.util.ArrayList;
 import java.util.List;
